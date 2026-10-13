@@ -1,0 +1,24 @@
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TouchdownFantasy.Web", "src\TouchdownFantasy.Web\TouchdownFantasy.Web.csproj", "{A6D74E25-8C19-4EAB-A021-1A5F33D86E11}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TouchdownFantasy.Tests", "tests\TouchdownFantasy.Tests\TouchdownFantasy.Tests.csproj", "{C24B41AE-34C9-4C8D-AE1C-25C33F29AB3D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A6D74E25-8C19-4EAB-A021-1A5F33D86E11}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A6D74E25-8C19-4EAB-A021-1A5F33D86E11}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A6D74E25-8C19-4EAB-A021-1A5F33D86E11}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A6D74E25-8C19-4EAB-A021-1A5F33D86E11}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C24B41AE-34C9-4C8D-AE1C-25C33F29AB3D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C24B41AE-34C9-4C8D-AE1C-25C33F29AB3D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C24B41AE-34C9-4C8D-AE1C-25C33F29AB3D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C24B41AE-34C9-4C8D-AE1C-25C33F29AB3D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

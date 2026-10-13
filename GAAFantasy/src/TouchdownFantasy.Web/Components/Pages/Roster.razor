@@ -1,0 +1,18 @@
+@page "/roster"
+@inject FantasyLeagueService League
+<PageTitle>My Roster | Touchdown Fantasy</PageTitle>
+<section class="page-wrap">
+    <div class="page-heading"><div><div class="eyebrow"><span class="eyebrow-line"></span> TEAM MANAGEMENT</div><h1>My roster</h1><p class="muted">Set your lineup and make every slot count.</p></div><span class="live-pill"><i></i> WEEK @League.Week</span></div>
+    <div class="roster-summary"><div><span>STARTER PROJECTION</span><b>@League.ProjectedStarterPoints.ToString("0.0") <small>pts</small></b></div><div><span>STARTERS</span><b>@League.StartingRoster.Count</b></div><div><span>ROSTER STATUS</span><b class="healthy">● All healthy</b></div><div><span>WAIVER BUDGET</span><b>$@League.WaiverBudget</b></div></div>
+    <section class="panel roster-full"><div class="panel-heading"><div><h2>Starting lineup</h2><p>Illustrative roster · sample player projections</p></div><button class="secondary-button" @onclick="Refresh">↻ Refresh projections</button></div>
+    <div class="full-table"><div class="full-head"><span>SLOT / PLAYER</span><span>TEAM</span><span>OPP</span><span>STATUS</span><span>PROJECTION</span><span>LAST WEEK</span></div>
+    @foreach (var slot in League.StartingRoster)
+    {
+        <div class="full-row"><div class="full-player"><span class="position-badge @slot.Position?.ToString()?.ToLowerInvariant()">@slot.Slot</span><div><b>@slot.Player?.Name</b><small>@slot.Player?.Position · @slot.Player?.RosteredPercent% rostered</small></div></div><span>@slot.Player?.Team</span><span class="opponent">@slot.Player?.Opponent</span><span><span class="status-dot"></span> @slot.Player?.Status</span><b class="points">@slot.Player?.ProjectedPoints.ToString("0.0")</b><span class="last-points">@slot.Player?.LastWeekPoints.ToString("0.0")</span></div>
+    }</div><div class="roster-table-footer"><span>@notice</span><b>Total projection: @League.ProjectedStarterPoints.ToString("0.0") pts</b></div></section>
+    <div class="notice-card"><span>ⓘ</span><div><b>Want to change your lineup?</b><p>This starter view uses sample data. Player swaps, persistence, and live projections are planned extension points for this demo.</p></div><a href="/players">Browse player pool →</a></div>
+</section>
+@code {
+    private string notice = "Lineup is up to date.";
+    private void Refresh() => notice = $"Demo projections refreshed at {DateTime.Now:HH:mm}. No live provider is connected.";
+}

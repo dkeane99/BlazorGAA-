@@ -1,2 +1,0 @@
-# BlazorGAA-
-GAA Blazor Application

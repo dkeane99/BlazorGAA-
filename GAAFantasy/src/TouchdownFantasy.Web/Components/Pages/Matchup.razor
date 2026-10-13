@@ -1,0 +1,15 @@
+@page "/matchup"
+<PageTitle>Matchup | Touchdown Fantasy</PageTitle>
+<section class="page-wrap">
+<div class="page-heading"><div><div class="eyebrow"><span class="eyebrow-line"></span> WEEK 7 · HEAD TO HEAD</div><h1>Matchup centre</h1><p class="muted">Every point matters. Track the battle for bragging rights.</p></div><span class="live-pill"><i></i> UPCOMING</span></div>
+<section class="matchup-hero panel"><div class="matchup-side"><div class="team-emblem yours">SL</div><span class="team-caption">YOUR TEAM · 4–2</span><h2>Sunday Legends</h2><p>Jordan Davis</p><div class="score-placeholder">— <small>PROJECTED</small></div></div><div class="versus"><span>WEEK 7</span><b>VS</b><small>OCT 18–19</small></div><div class="matchup-side"><div class="team-emblem opponent">GG</div><span class="team-caption">OPPONENT · 5–1</span><h2>Gridiron Gurus</h2><p>Alex Morgan</p><div class="score-placeholder">— <small>PROJECTED</small></div></div></section>
+<div class="section-title-row"><h2>Matchup breakdown</h2><span class="subtle">Illustrative comparison</span></div>
+<section class="panel comparison-panel">
+@foreach (var item in comparisons)
+{<div class="comparison-row"><div class="compare-number">@item.Mine.ToString("0.0")</div><div class="compare-middle"><div class="compare-label">@item.Label</div><div class="compare-track"><span style="width:@(item.Mine / (item.Mine + item.Theirs) * 100)%"></span><i style="left:@(item.Mine / (item.Mine + item.Theirs) * 100)%"></i></div></div><div class="compare-number right">@item.Theirs.ToString("0.0")</div></div>}
+</section>
+<div class="notice-card"><span>ⓘ</span><div><b>Matchup projections are placeholders</b><p>Connect a licensed sports data provider and calculate opposing lineup projections to make this a live matchup experience.</p></div></div>
+</section>
+@code {
+    private readonly (string Label, decimal Mine, decimal Theirs)[] comparisons = [("Quarterback", 24.8m, 23.1m), ("Running backs", 39.6m, 42.2m), ("Wide receivers", 57.3m, 51.8m), ("Tight end", 12.4m, 11.7m), ("Kicker & defence", 16.2m, 14.6m)];
+}

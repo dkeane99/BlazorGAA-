@@ -1,0 +1,13 @@
+@page "/insights"
+@inject FantasyLeagueService League
+<PageTitle>Insights | Touchdown Fantasy</PageTitle>
+<section class="page-wrap">
+<div class="page-heading"><div><div class="eyebrow"><span class="eyebrow-line"></span> DATA & DECISIONS</div><h1>Team insights</h1><p class="muted">Turn your roster data into a smarter game plan.</p></div><span class="live-pill">DEMO ANALYTICS</span></div>
+<div class="insights-grid"><article class="panel insight-card"><span class="stat-icon purple">↗</span><div class="stat-label">STARTER PROJECTION</div><div class="insight-big">@League.ProjectedStarterPoints.ToString("0.0") <small>pts</small></div><p>Combined projected output from the current starting lineup.</p><div class="insight-footer">Based on demo player projections</div></article><article class="panel insight-card"><span class="stat-icon green">◎</span><div class="stat-label">ROSTER CONCENTRATION</div><div class="insight-big">3 <small>positions</small></div><p>QB, RB and WR depth provide the largest share of weekly scoring.</p><div class="insight-footer">Explore the player pool to compare options</div></article><article class="panel insight-card"><span class="stat-icon orange">⚑</span><div class="stat-label">WAIVER STRATEGY</div><div class="insight-big">$@League.WaiverBudget <small>left</small></div><p>Keep budget available for late-season injuries and playoff pushes.</p><div class="insight-footer">Budget is illustrative, not persisted</div></article></div>
+<section class="panel"><div class="panel-heading"><div><h2>Next steps</h2><p>Suggested development roadmap for this demo</p></div></div><div class="roadmap">
+<div class="roadmap-item"><span class="roadmap-num">01</span><div><b>Connect real player data</b><p>Integrate a licensed NFL data provider behind a typed API client.</p></div><span class="roadmap-tag">DATA</span></div>
+<div class="roadmap-item"><span class="roadmap-num">02</span><div><b>Persist rosters and league settings</b><p>Use EF Core, SQL Server or PostgreSQL, and database migrations.</p></div><span class="roadmap-tag">BACKEND</span></div>
+<div class="roadmap-item"><span class="roadmap-num">03</span><div><b>Automate quality gates</b><p>Add unit tests, CI build validation, formatting, and security scanning.</p></div><span class="roadmap-tag">DEVOPS</span></div>
+<div class="roadmap-item"><span class="roadmap-num">04</span><div><b>Secure team management</b><p>Add authentication, authorization, league membership, and audit logging.</p></div><span class="roadmap-tag">SECURITY</span></div>
+</div></section>
+</section>
