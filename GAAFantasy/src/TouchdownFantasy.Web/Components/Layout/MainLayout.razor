@@ -1,0 +1,27 @@
+@inherits LayoutComponentBase
+<div class="app-shell">
+    <aside class="sidebar">
+        <a class="brand" href="/"><span class="brand-mark">T</span><span>TOUCHDOWN<span class="brand-sub">FANTASY FRONT OFFICE</span></span></a>
+        <div class="league-label">YOUR LEAGUE</div>
+        <div class="league-switch"><span class="league-avatar">🏈</span><span><b>Sunday Legends</b><small>12-team · PPR</small></span><span class="chevron">⌄</span></div>
+        <nav>
+            <div class="nav-heading">MANAGE</div>
+            <a class="nav-link active" href="/"><span>▦</span> Overview <span class="nav-dot"></span></a>
+            <a class="nav-link" href="/roster"><span>♟</span> My Roster</a>
+            <a class="nav-link" href="/matchup"><span>⚔</span> Matchup</a>
+            <a class="nav-link" href="/players"><span>⌕</span> Player Pool</a>
+            <div class="nav-heading spaced">LEAGUE</div>
+            <a class="nav-link" href="/standings"><span>▤</span> Standings</a>
+            <a class="nav-link" href="/insights"><span>◈</span> Insights</a>
+        </nav>
+        <div class="sidebar-bottom">
+            <div class="pro-card"><span class="pro-icon">✦</span><b>Level up your game</b><p>Make smarter calls with data-driven insights.</p><button>Explore Pro ↗</button></div>
+            <div class="user-row"><div class="user-avatar">JD</div><div><b>Jordan Davis</b><small>League manager</small></div><span class="more">•••</span></div>
+        </div>
+    </aside>
+    <main class="main-content">
+        <header class="topbar"><div class="breadcrumb">Sunday Legends <span>/</span> <b>Front Office</b></div><div class="top-actions"><span class="live-pill"><i></i> SEASON 2026</span><button class="icon-button" title="Notifications">♧<span class="notification"></span></button><div class="top-avatar">JD</div></div></header>
+        @Body
+        <footer class="footer"><span>TOUCHDOWN FANTASY</span><span>Built for the love of the game · Demo data only</span></footer>
+    </main>
+</div>

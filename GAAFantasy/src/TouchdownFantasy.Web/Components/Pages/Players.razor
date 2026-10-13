@@ -1,0 +1,24 @@
+@page "/players"
+@inject FantasyLeagueService League
+<PageTitle>Player Pool | Touchdown Fantasy</PageTitle>
+<section class="page-wrap">
+    <div class="page-heading"><div><div class="eyebrow"><span class="eyebrow-line"></span> SCOUTING DEPARTMENT</div><h1>Player pool</h1><p class="muted">Find your next breakout. Filter the board and compare projections.</p></div><div class="player-count">@FilteredPlayers.Count() <span>players found</span></div></div>
+    <section class="panel player-panel"><div class="filter-bar"><div class="search-box"><span>⌕</span><input placeholder="Search players or teams..." @bind="search" @bind:event="oninput" /></div><select @bind="position"><option value="All">All positions</option>@foreach (var pos in Enum.GetValues<Position>()){<option value="@pos">@pos</option>}</select><select @bind="sort"><option value="Projection">Sort: Projection</option><option value="LastWeek">Sort: Last week</option><option value="Rostered">Sort: Rostered %</option></select></div>
+    <div class="full-table"><div class="player-head"><span>PLAYER</span><span>POS</span><span>TEAM</span><span>OPP</span><span>ROSTERED</span><span>PROJ. PTS</span><span>LAST WK</span></div>
+    @foreach (var p in FilteredPlayers)
+    {<div class="player-row"><div class="full-player"><div class="player-avatar">@Initials(p.Name)</div><div><b>@p.Name</b><small>@p.Status</small></div></div><span><span class="position-badge @p.Position.ToString().ToLowerInvariant()">@p.Position</span></span><span>@p.Team</span><span>@p.Opponent</span><div class="rostered-cell"><div class="tiny-track"><span style="width:@p.RosteredPercent%"></span></div><small>@p.RosteredPercent%</small></div><b class="points">@p.ProjectedPoints.ToString("0.0")</b><span class="last-points">@p.LastWeekPoints.ToString("0.0")</span></div>}
+    </div>
+    @if (!FilteredPlayers.Any()) { <div class="empty-state"><h3>No players found</h3><p>Try a different name or position.</p></div> }
+    <div class="panel-bottom-link">Showing sample player data <span>·</span> Not connected to a live stats provider</div>
+    </section>
+</section>
+@code {
+    private string search = "";
+    private string position = "All";
+    private string sort = "Projection";
+    private IEnumerable<Player> FilteredPlayers => League.Players
+        .Where(p => (position == "All" || p.Position.ToString() == position)
+            && (string.IsNullOrWhiteSpace(search) || p.Name.Contains(search, StringComparison.OrdinalIgnoreCase) || p.Team.Contains(search, StringComparison.OrdinalIgnoreCase)))
+        .OrderByDescending(p => sort switch { "LastWeek" => p.LastWeekPoints, "Rostered" => p.RosteredPercent, _ => p.ProjectedPoints });
+    private static string Initials(string name) => string.Concat(name.Split(' ', StringSplitOptions.RemoveEmptyEntries).Take(2).Select(s => char.ToUpperInvariant(s[0])));
+}

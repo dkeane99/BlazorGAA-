@@ -1,0 +1,49 @@
+@page "/"
+@inject FantasyLeagueService League
+
+<PageTitle>Dashboard | Touchdown Fantasy</PageTitle>
+<section class="page-wrap">
+    <div class="page-heading"><div><div class="eyebrow"><span class="eyebrow-line"></span> WEEK @League.Week · REGULAR SEASON</div><h1>Good evening, Jordan <span class="wave">✦</span></h1><p class="muted">Your front office is ready. Here's the state of your season.</p></div><button class="primary-button" @onclick="GoToRoster">Manage lineup <span>↗</span></button></div>
+
+    <section class="hero-card">
+        <div class="hero-content"><div class="hero-kicker"><span class="hero-dot"></span> YOUR NEXT MATCHUP</div><h2>Every point<br />moves you closer.</h2><p>Week 7 is here. Make your moves before kickoff.</p><a href="/matchup" class="hero-link">View matchup <span>→</span></a></div>
+        <div class="hero-record"><div class="record-label">CURRENT RECORD</div><div class="record-number">4<span>–</span>2</div><div class="record-foot"><span class="up-arrow">↗</span> 2-game win streak</div><div class="hero-divider"></div><div class="record-label">LEAGUE RANK</div><div class="rank-number">#2 <small>of 12 teams</small></div></div>
+        <div class="hero-decoration"><div class="orb orb-one"></div><div class="orb orb-two"></div><div class="orb orb-three"></div><div class="field-lines"></div><div class="football">🏈</div></div>
+    </section>
+
+    <div class="section-title-row"><h2>Season at a glance</h2><span class="subtle">Updated for Week @League.Week</span></div>
+    <div class="stats-grid">
+        <article class="stat-card"><div class="stat-top"><span class="stat-icon purple">▥</span><span class="trend positive">↗ 12.4%</span></div><div class="stat-label">POINTS FOR</div><div class="stat-value">784.6 <small>pts</small></div><div class="mini-chart"><span style="height:34%"></span><span style="height:48%"></span><span style="height:40%"></span><span style="height:68%"></span><span style="height:53%"></span><span style="height:82%"></span><span style="height:70%"></span><span style="height:100%"></span></div><div class="stat-foot">League avg. <b>721.3 pts</b></div></article>
+        <article class="stat-card"><div class="stat-top"><span class="stat-icon green">♜</span><span class="trend positive">+2 places</span></div><div class="stat-label">POWER RANKING</div><div class="stat-value">#2 <small>/ 12</small></div><div class="rank-track"><span style="width:84%"></span></div><div class="stat-foot">Top <b>17%</b> of the league</div></article>
+        <article class="stat-card"><div class="stat-top"><span class="stat-icon orange">◷</span><span class="trend neutral">Week 7</span></div><div class="stat-label">STARTER PROJECTION</div><div class="stat-value">@League.ProjectedStarterPoints.ToString("0.0") <small>pts</small></div><div class="projection-bar"><span style="width:74%"></span></div><div class="stat-foot">Last week <b>@League.LastWeekStarterPoints.ToString("0.0") pts</b></div></article>
+        <article class="stat-card"><div class="stat-top"><span class="stat-icon blue">＄</span><span class="trend positive">Available</span></div><div class="stat-label">WAIVER BUDGET</div><div class="stat-value">$@League.WaiverBudget <small>/ $100</small></div><div class="rank-track"><span style="width:72%"></span></div><div class="stat-foot">Spent <b>$28</b> this season</div></article>
+    </div>
+
+    <div class="dashboard-columns">
+        <section class="panel roster-panel"><div class="panel-heading"><div><h2>Starting lineup</h2><p>Your projected starters for Week @League.Week</p></div><a href="/roster" class="text-link">Full roster ↗</a></div>
+            <div class="roster-table">
+                <div class="table-head"><span>PLAYER</span><span>OPP</span><span>PROJ. PTS</span><span>LAST WK</span></div>
+                @foreach (var slot in League.StartingRoster)
+                {
+                    if (slot.Player is not null)
+                    {
+                        <div class="roster-row"><div class="player-cell"><span class="position-badge @slot.Player.Position.ToString().ToLowerInvariant()">@slot.Player.Position</span><div><b>@slot.Player.Name</b><small>@slot.Player.Team <span class="separator">·</span> @slot.Slot</small></div></div><span class="opponent">@slot.Player.Opponent <small>BYE</small></span><b class="points">@slot.Player.ProjectedPoints.ToString("0.0")</b><span class="last-points">@slot.Player.LastWeekPoints.ToString("0.0")</span></div>
+                    }
+                }
+            </div><a href="/roster" class="panel-bottom-link">Review your full lineup <span>→</span></a>
+        </section>
+        <section class="panel schedule-panel"><div class="panel-heading"><div><h2>Coming up</h2><p>Week 7 · Around the league</p></div><span class="calendar-icon">▦</span></div>
+            <div class="schedule-list">@foreach (var game in League.Schedule)
+            {<div class="schedule-item"><div class="schedule-date">@game.Day</div><div class="schedule-main"><b>@game.Game</b><small>@game.Note</small></div><span class="schedule-time">@game.Time</span></div>}</div>
+            <div class="schedule-note"><span>ⓘ</span><p>Kickoff times shown in Eastern Time. Demo schedule for portfolio purposes.</p></div>
+            <a href="/matchup" class="panel-bottom-link">Explore matchup <span>→</span></a>
+        </section>
+    </div>
+
+    <section class="insight-banner"><div class="insight-symbol">✦</div><div><div class="insight-label">FRONT OFFICE INSIGHT <span>DEMO</span></div><b>Your roster has room to improve at FLEX.</b><p>Puka Nacua is projected for 17.3 points. Check player availability before locking in your lineup.</p></div><a href="/players">Explore players <span>→</span></a></section>
+</section>
+
+@code {
+    private void GoToRoster() => Navigation.NavigateTo("/roster");
+    [Inject] private NavigationManager Navigation { get; set; } = default!;
+}

@@ -1,0 +1,11 @@
+@page "/standings"
+@inject FantasyLeagueService League
+<PageTitle>Standings | Touchdown Fantasy</PageTitle>
+<section class="page-wrap">
+<div class="page-heading"><div><div class="eyebrow"><span class="eyebrow-line"></span> THE RACE TO THE PLAYOFFS</div><h1>League standings</h1><p class="muted">Twelve teams. One trophy. Every week counts.</p></div><span class="live-pill">WEEK 7</span></div>
+<div class="standings-summary"><div class="panel mini-summary"><span>LEAGUE LEADER</span><b>Gridiron Gurus</b><small>5–1 record</small></div><div class="panel mini-summary"><span>PLAYOFF LINE</span><b>Top 6 teams</b><small>Regular season race</small></div><div class="panel mini-summary"><span>YOUR POSITION</span><b>#2 <small>of 12</small></b><small>Two wins in a row</small></div></div>
+<section class="panel standings-panel"><div class="panel-heading"><div><h2>Power table</h2><p>Sorted by current league rank · sample data</p></div><span class="subtle">2026 Season</span></div><div class="full-table"><div class="standings-head"><span>RANK</span><span>TEAM / MANAGER</span><span>RECORD</span><span>PF</span><span>PA</span><span>DIFF</span><span>STREAK</span></div>
+@foreach(var team in League.Standings)
+{<div class="standings-row @(team.Team == "Sunday Legends" ? "your-team" : "")"><span class="rank-cell">@(team.Rank <= 3 ? "♛" : team.Rank.ToString())</span><div class="standing-team"><b>@team.Team</b><small>@team.Manager</small></div><b>@team.Record</b><span>@team.PointsFor.ToString("0.0")</span><span>@team.PointsAgainst.ToString("0.0")</span><span class="@(team.PointsFor >= team.PointsAgainst ? "positive-text" : "negative-text")">@(team.PointsFor >= team.PointsAgainst ? "+" : "")@((team.PointsFor - team.PointsAgainst).ToString("0.0"))</span><span class="streak">@(team.Streak > 0 ? $"W{team.Streak}" : "—")</span></div>}
+</div></section>
+</section>
